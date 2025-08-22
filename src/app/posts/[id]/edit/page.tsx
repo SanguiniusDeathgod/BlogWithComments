@@ -1,7 +1,8 @@
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { updatePost } from "@/app/actions";
 
-export default async function EditPost({ params }: { params: { id: string } }) {
+export default async function EditPost(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = Number(params.id);
 
   const { data: post } = await supabaseAdmin

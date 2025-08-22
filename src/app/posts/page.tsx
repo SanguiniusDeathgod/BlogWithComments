@@ -4,11 +4,12 @@ import { deletePost } from "@/app/actions";
 
 export const dynamic = "force-dynamic";
 
-export default async function PostsPage({
-  searchParams,
-}: {
-  searchParams: { sort?: "asc" | "desc" };
-}) {
+export default async function PostsPage(
+  props: {
+    searchParams: Promise<{ sort?: "asc" | "desc" }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const sort = searchParams?.sort === "asc" ? "asc" : "desc";
 
   const { data: posts, error } = await supabaseAdmin
